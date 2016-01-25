@@ -6,25 +6,29 @@
 # port numbers or service names from ``/etc/services``.
 avachi_ferm_ports: [ 'mdns' ]
 
-# .. envvar:: avachi_ferm_dependent_rules:
+# .. envvar:: avachi_ferm_ports
+#
+# Determines the order of the files in the configuration directory, and order
+# of the firewall rules.
+avachi_ferm_weight: '40'
+
+# .. envvar:: avachi_ferm_interface
+#
+# List of allowed network interfaces.
+# If the list is empty, then allowed access to all network interfaces.
+avachi_ferm_interface: []
+
+# .. envvar:: avachi_ferm_dependent_rules
 #
 # Configuration for ``iptables`` firewall managed by ``ferm``.
 avachi_ferm_dependent_rules:
 
   - type: 'accept'
     dport: '{{ avachi_ferm_ports }}'
-    weight: '{{ sshd_ferm_weight }}'
-    protocol: 'tcp'
-    role: 'avachi'
-    name: 'mdns'
-    multiport: True
-    accept_any: True
-
-  - type: 'accept'
-    dport: '{{ avachi_ferm_ports }}'
-    weight: '{{ sshd_ferm_weight }}'
-    protocol: 'udp'
+    weight: '{{ avachi_ferm_weight }}'
+    protocol: [ 'tcp', 'udp' ]
     role: 'avachi'
     name: 'mdns'
     accept_any: True
+    interface: '{{ avachi_ferm_interface }}'
 
