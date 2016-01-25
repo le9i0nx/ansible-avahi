@@ -6,12 +6,6 @@
 # port numbers or service names from ``/etc/services``.
 avachi_ferm_ports: [ 'mdns' ]
 
-# .. envvar:: avachi_ferm_ports
-#
-# Determines the order of the files in the configuration directory, and order
-# of the firewall rules.
-avachi_ferm_weight: '40'
-
 # .. envvar:: avachi_ferm_interface
 #
 # List of allowed network interfaces.
@@ -25,7 +19,6 @@ avachi_ferm_dependent_rules:
 
   - type: 'accept'
     dport: '{{ avachi_ferm_ports }}'
-    weight: '{{ avachi_ferm_weight }}'
     protocol: [ 'tcp', 'udp' ]
     role: 'avachi'
     name: 'mdns'
