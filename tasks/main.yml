@@ -11,12 +11,10 @@
     - 'libnss-mdns'
 
 - name: edit nsswitch.conf add mdns ipv6
-  lineinfile:
+  replace:
     dest: '/etc/nsswitch.conf'
-    state: present
-    regexp: '^(.*)mdns4_minimal(.*)$'
-    line: '\1mdns_minimal\2'
+    regexp: 'mdns4_minimal'
+    replace: 'mdns_minimal'
     backup: yes
-    backrefs: yes
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
