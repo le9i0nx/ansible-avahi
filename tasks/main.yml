@@ -10,4 +10,13 @@
     - 'avahi-autoipd'
     - 'libnss-mdns'
 
+- name: edit nsswitch.conf add mdns ipv6
+  lineinfile:
+    dest: '/etc/nsswitch.conf'
+    state: present
+    regexp: '^(.*)mdns4_minimal(.*)$'
+    line: '\1mdns_minimal\2'
+    backup: yes
+    backrefs: yes
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
