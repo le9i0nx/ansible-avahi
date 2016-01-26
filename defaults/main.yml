@@ -25,3 +25,4 @@ avachi_ferm_dependent_rules:
     accept_any: True
     interface: '{{ avachi_ferm_interface }}'
 
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
